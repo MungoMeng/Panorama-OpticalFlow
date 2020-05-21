@@ -1,11 +1,3 @@
-//
-//  PixFlow.hpp
-//  OpticalFlow
-//
-//  Created by MungoMeng on 2017/7/24.
-//  Copyright © 2017年 MungoMeng. All rights reserved.
-//
-
 #include <algorithm>
 #include <cmath>
 #include <cuda_runtime.h> 
@@ -22,7 +14,6 @@ namespace optical_flow {
     using namespace util;
 
     OpticalFlowInterface_GPU* makeOpticalFlowByName_GPU(const string flowAlgName) {
-        //若选择pixflow_low模式，则进行以下操作
         if (flowAlgName == "pixflow_low") {
             static const float kPyrScaleFactor                  = 0.9f;
             static const float kSmoothnessCoef                  = 0.001f;
@@ -43,7 +34,7 @@ namespace optical_flow {
                                   MaxPercentage
                                   );
         }
-        //若选择pixflow_search_20模式，则进行以下操作
+
         if (flowAlgName == "pixflow_search_20") {
             static const float kPyrScaleFactor                  = 0.9f;
             static const float kSmoothnessCoef                  = 0.001f;
@@ -64,11 +55,10 @@ namespace optical_flow {
                                    MaxPercentage
                                    );
         }
-        //若flowAlgName为不可识别的字符串，则抛出错误信息
         throw VrCamException("unrecognized flow algorithm name: " + flowAlgName);
     }
 
-    //定义在cuda上运行时需要用到的inline函数
+
     __device__ inline float getPixBilinear32FExtend(const cuda::PtrStepSz<float> img, float x, float y) {
         x                 = fminf(img.cols - 2.0f, fmaxf(0.0f, x));
         y                 = fminf(img.rows - 2.0f, fmaxf(0.0f, y));
@@ -159,7 +149,7 @@ namespace optical_flow {
         return result;
     }
 
-    //定义sweep核，对每一个像素点进行并行的sweep操作
+
     __global__ void Sweep_Kernel(const cuda::PtrStepSz<float> I0,
                                       const cuda::PtrStepSz<float> I1,
                                       const cuda::PtrStepSz<float> alpha0,
@@ -183,7 +173,6 @@ namespace optical_flow {
             float currErr = errorFunction(I0, I1, alpha0, alpha1, I0x, I0y, I1x, I1y, x, y, flow, blurredFlow, flow(y, x),
                                           smoothnessCoef,verticalRegularizationCoef,horizontalRegularizationCoef);
 
-            //对4邻域的点计算err值，若发现更好的匹配点，则用其替换当前点的值
             if (y > 0){
                 float proposalErr = errorFunction(I0, I1, alpha0, alpha1, I0x, I0y, I1x, I1y, x, y, flow, blurredFlow, flow(y - 1, x),
                                                   smoothnessCoef,verticalRegularizationCoef,horizontalRegularizationCoef);
@@ -224,7 +213,7 @@ namespace optical_flow {
         }
     }
 
-    //在GPU加速模式下使用的patchMatchPropagationAndSearch函数
+
     void PixFlow_GPU::patchMatchPropagationAndSearch(
                                         const Mat& I0,
                                         const Mat& I1,
@@ -267,7 +256,6 @@ namespace optical_flow {
                      kBlurredFlowSigma);
         const cv::Size imgSize = I0.size();
 
-        //载入数据到GPU设备端
         cuda::GpuMat g_I0(I0);
         cuda::GpuMat g_I1(I1);
         cuda::GpuMat g_alpha0(alpha0);
@@ -279,11 +267,10 @@ namespace optical_flow {
         cuda::GpuMat g_flow(flow);
         cuda::GpuMat g_blurredFlow(blurredFlow);
 
-        //定义线程块的大小及数量
+
         dim3 threadsPerBlock(32,32);
         dim3 blocksPerGrid((flow.cols + threadsPerBlock.x - 1) / threadsPerBlock.x, (flow.rows + threadsPerBlock.y - 1) / threadsPerBlock.y);
 
-        //循环调用sweep核，多次进行并行的sweep操作
         for(int i = 0; i < 10; i++)
         Sweep_Kernel<<<blocksPerGrid, threadsPerBlock>>>(g_I0,
                                                          g_I1,
@@ -302,14 +289,12 @@ namespace optical_flow {
                                                          gradientStepSize,
                                                          kGradEpsilon);
 
-        //数据由GPU设备载出到CPU
         g_flow.download(flow);
 
         medianBlur(flow, flow, kMedianBlurSize);
         PixFlow_GPU::lowAlphaFlowDiffusion(alpha0, alpha1, flow);
     }
 
-    //定义lowAlphaFlowDiffusion核，对每一个像素点进行并行的操作
     __global__ void lowAlphaFlowDiffusion_Kernel(const cuda::PtrStepSz<float> alpha0, 
                                                  const cuda::PtrStepSz<float> alpha1, 
                                                  cuda::PtrStepSz<float2> flow, 
@@ -328,7 +313,6 @@ namespace optical_flow {
         }
     }
 
-    //在GPU加速模式下使用的lowAlphaFlowDiffusion函数
     void PixFlow_GPU::lowAlphaFlowDiffusion(const Mat& alpha0, const Mat& alpha1, Mat& flow) {
         Mat blurredFlow;
         GaussianBlur(
@@ -337,23 +321,18 @@ namespace optical_flow {
                      Size(kBlurredFlowKernelWidth, kBlurredFlowKernelWidth),
                      kBlurredFlowSigma);
 
-        //数据载入到GPU设备
         cuda::GpuMat g_alpha0(alpha0);
         cuda::GpuMat g_alpha1(alpha1);
         cuda::GpuMat g_blurredFlow(blurredFlow);
         cuda::GpuMat g_flow(flow);
 
-        //定义线程块的大小及数量
         dim3 threadsPerBlock(32,32);
         dim3 blocksPerGrid((flow.cols + threadsPerBlock.x - 1) / threadsPerBlock.x, (flow.rows + threadsPerBlock.y - 1) / threadsPerBlock.y);
 
-        //用于调试，输出相关信息
         //printf("CUDA kernel launch with %d blocks of %d threads\n", blocksPerGrid.x*blocksPerGrid.y, threadsPerBlock.x*threadsPerBlock.y);
 
-        //调用lowAlphaFlowDiffusion核，进行并行计算
         lowAlphaFlowDiffusion_Kernel<<<blocksPerGrid, threadsPerBlock>>>(g_alpha0, g_alpha1, g_flow, g_blurredFlow);
 
-        //数据由GPU设备载出到CPU
         g_flow.download(flow);
     }
 }

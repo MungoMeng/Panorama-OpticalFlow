@@ -1,11 +1,3 @@
-//
-//  util.cpp
-//  OpticalFlow
-//
-//  Created by MungoMeng on 2017/7/24.
-//  Copyright © 2017年 MungoMeng. All rights reserved.
-//
-
 #include "util.hpp"
 
 #include <assert.h>

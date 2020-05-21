@@ -1,11 +1,3 @@
-//
-//  util.hpp
-//  OpticalFlow
-//
-//  Created by MungoMeng on 2017/7/24.
-//  Copyright © 2017年 MungoMeng. All rights reserved.
-//
-
 #ifndef util_hpp
 #define util_hpp
 
@@ -41,7 +33,6 @@ namespace util {
     using namespace cv;
     using namespace chrono;
     
-    //用于输出错误信息
     struct VrCamException : public std::exception {
         std::string msg;
         VrCamException() {}
@@ -49,22 +40,20 @@ namespace util {
         const char* what() const noexcept { return msg.c_str(); }
     };
     
-    //用于检查传入的命令行参数是否有效
     static void requireArg(const string& argValue, const string& argName) {
         if (argValue.empty()) {
             throw VrCamException("missing required command line argument: " + argName);
         }
     }
     
-    //用于获取系统当前时刻
     static double getCurrTimeSec() {
         return (double)(system_clock::now().time_since_epoch().count()) * system_clock::period::num / system_clock::period::den;
     }
     
-    //用于读取本地图片
+    //load image
     Mat imreadExceptionOnFail(const string& filename, const int flags);
     
-    //用于写入图片到电脑
+    //write image
     void imwriteExceptionOnFail(
                                 const string& filename,
                                 const Mat& image,
@@ -73,7 +62,6 @@ namespace util {
     Mat stackHorizontal(const std::vector<Mat>& images);
     
     // <--------------------------------------------------------------------------------->
-    //以下函数用于数学运算
     template <typename T>
     inline T square(const T x) { return x * x; }
     
@@ -218,7 +206,7 @@ namespace util {
         T inline operator()(const T x) const {
             const T xr = (x - xMin) * xRangeRecip - T(1);
             const T xp = xr > T(0) ? xr : -xr;
-            const T yp = // Horner's rule
+            const T yp = 
             (xp < T(1.0)) ? ((xp < T(0.5))
                              ? a0 + xp*(     xp*(a2 + xp*a3))
                              : b0 + xp*(b1 + xp*(b2 + xp*b3)))

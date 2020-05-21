@@ -1,11 +1,3 @@
-//
-//  PixFlow.hpp
-//  OpticalFlow
-//
-//  Created by MungoMeng on 2017/7/24.
-//  Copyright © 2017年 MungoMeng. All rights reserved.
-//
-
 #ifndef PixFlow_GPU_h
 #define PixFlow_GPU_h
 
@@ -20,15 +12,12 @@ namespace optical_flow {
     using namespace cv::detail;
     using namespace util;
     
-    //用于计算两图间的光流偏移量，为基类，定义虚函数
     class OpticalFlowInterface_GPU {
     public:
         virtual ~OpticalFlowInterface_GPU() {};
         
-        //标记图片所处相对位置
         enum class DirectionHint { UNKNOWN, RIGHT, DOWN, LEFT, UP };
         
-        //计算I0BGRA到I1BGRA的光流偏移量
         virtual void computeOpticalFlow_GPU(
                                         const Mat& I0BGRA,
                                         const Mat& I1BGRA,
@@ -36,10 +25,8 @@ namespace optical_flow {
                                         DirectionHint hint) = 0;
     };
     
-    //用于计算两图间的光流偏移量
     class PixFlow_GPU : public OpticalFlowInterface_GPU {
     public:
-        //定义后续操作中需要用到的参数
         static constexpr int kPyrMinImageSize               = 24;
         static constexpr int kPyrMaxLevels                  = 1000;
         static constexpr float kGradEpsilon                 = 0.001f;  // for finite differences
@@ -54,8 +41,6 @@ namespace optical_flow {
         static constexpr int kBlurredFlowKernelWidth        = 15;      // for regularization/smoothing/diffusion
         static constexpr float kBlurredFlowSigma            = 8.0f;
         
-        //随PixFlow模式变化而变换的参数
-        //由PixFlow初始化时给入
         const float pyrScaleFactor;
         const float smoothnessCoef;
         const float verticalRegularizationCoef;
@@ -65,7 +50,6 @@ namespace optical_flow {
         const float directionalRegularizationCoef;
         const int MaxPercentage;
         
-        //构造函数
         PixFlow_GPU(
                 const float pyrScaleFactor,
                 const float smoothnessCoef,
@@ -86,14 +70,12 @@ namespace optical_flow {
         
         ~PixFlow_GPU() {}
         
-        //下面函数均用于计算光流场
         void computeOpticalFlow_GPU(
                                 const Mat& rgba0byte,
                                 const Mat& rgba1byte,
                                 Mat& flow,
                                 DirectionHint hint) {
-                
-            //将图像降采样到更小的尺寸，提高处理速度
+            
             Mat rgba0byteDownscaled, rgba1byteDownscaled;
             cv::Size originalSize = rgba0byte.size();
             cv::Size downscaleSize(
@@ -102,7 +84,6 @@ namespace optical_flow {
             resize(rgba1byte, rgba1byteDownscaled, downscaleSize, 0, 0, CV_INTER_CUBIC);
             Mat motion = Mat(downscaleSize, CV_32F);
             
-            //将图片变换到多种色度空间
             Mat I0Grey, I1Grey, I0, I1, alpha0, alpha1;
             vector<Mat> channels0, channels1;
             split(rgba0byteDownscaled, channels0);
@@ -122,7 +103,7 @@ namespace optical_flow {
             GaussianBlur(I0, I0, Size(kPreBlurKernelWidth, kPreBlurKernelWidth), kPreBlurSigma);
             GaussianBlur(I1, I1, Size(kPreBlurKernelWidth, kPreBlurKernelWidth), kPreBlurSigma);
             
-            //建立图像金字塔
+            //build pyramid
             vector<Mat> pyramidI0       = buildPyramid(I0);
             vector<Mat> pyramidI1       = buildPyramid(I1);
             vector<Mat> pyramidAlpha0   = buildPyramid(alpha0);
@@ -145,7 +126,6 @@ namespace optical_flow {
                 }
             }
             
-            //将所得结果变换为原尺寸图像
             resize(flow, flow, originalSize, 0, 0, CV_INTER_LINEAR);
             flow *= (1.0f / downscaleFactor);
             GaussianBlur(
@@ -174,7 +154,6 @@ namespace optical_flow {
         float computePatchError(
                                 const Mat& i0, const Mat& alpha0, int i0x, int i0y,
                                 const Mat& i1, const Mat& alpha1, int i1x, int i1y){
-            //在5*5的方格中计算绝对距离之和
             static const int kPatchRadius = 2;
             float sad = 0;
             float alpha = 0;
@@ -397,8 +376,6 @@ namespace optical_flow {
         }
     };
     
-    //用于初始化模板类结构体PixFlow
-    //输入不同的flowAlgName，对PixFlow进行不同模式的初始化
     OpticalFlowInterface_GPU* makeOpticalFlowByName_GPU(const string flowAlgName);
 }
 
