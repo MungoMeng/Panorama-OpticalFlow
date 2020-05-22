@@ -38,15 +38,15 @@ Other versions of OpenCV and Cuda might work as well, but there is no guarantee 
 
 ### Requirements for input photos
 Our algorithm requires the camera to rotate horizontally around a vertical rotation axis, 
-or require multiple cameras around an axis on the same horizontal plane to capture photos at various angles at the same time. 
-Besides, it’s also necessary to set a vertical camera to get the scene information in the vertical direction (see Figure bwlow).
+or requires multiple cameras around an axis on the same horizontal plane to capture photos at various angles at the same time. 
+Besides, it’s also necessary to set a vertical camera to get the scene information in the vertical direction (see Figure below).
 
 ![Input_requirement](https://github.com/MungoMeng/Panorama_OpticalFlow/blob/master/Figure/Input_requirement.png)
 
 Our code needs 6 photos with overlap as input. Among them, 1 photo is captured by a vertical camera and is named `top.tif`, 
 other 5 photos are captured by horizontal cameras and are named from `1.tif` to `5.tif`. All these 6 photos should be put into the same address.  
 Before fed into this program, these 6 photos need to be pre-processed with distortion/chromaticity correction and a coarse registration.
-This part can be finished with many existing software package (e.g. [Hugin](http://hugin.sourceforge.net/)) and is not included in this repository.
+This part can be finished with many existing packages (e.g. [Hugin](http://hugin.sourceforge.net/)) and is not included in this repository.
 
 
 ### Build and Run
@@ -55,18 +55,18 @@ and get a executable file. E.g, for GPU version code, the commond looks like:
 ```
 nvcc *.cpp *.cu -o outputfile `pkg-config opencv --cflags --libs` -std=c++11
 ```
-When you get the executable file, you can run it directly with following parameters:  
+When you get the executable file, you can run it directly with the following parameters:  
 
 * `-test_dir`: specify the directory containing input photos.
-* `-top_img`: specify the file name of top photo such as 'top.tif'.
+* `-top_img`: specify the file name of the top photo such as 'top.tif'.
 * `-flow_alg`: specify the mode of calculating optical flow (pixflow_low/pixflow_search_20).
 
 The code only outputs a panoramic image as the final result, 
-but, if you want, you can uncomment some lines in the `main.cpp` to output intermediate results of stitching each photo in each iternation.
+but, if you want, you can uncomment some lines in the `main.cpp` to output intermediate results of stitching each photo in each iteration.
 
 ## Alternative version
 We also provide an alternative version code in the `/CPU_4Input`. This program can be used when you have 4 horizontal
-photos captured by wide-angle lens cameras. This program can stitching all 4 photos in one pass, so it's much faster then original version.
+photos captured by wide-angle lens cameras. This program can stitch all 4 photos in one pass, so it's much faster than the original version.
 
 ## Test data
 In the `/Test_data` and `/Test_data_4Input`, we provide some input photos to test our algorithm/code. 
