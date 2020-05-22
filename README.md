@@ -50,8 +50,7 @@ This part can be finished with many existing packages (e.g. [Hugin](http://hugin
 
 
 ### Build and Run
-Please `cd` to the source code directory such as `cd /GPU`, and then you can use a C++ complier to build all source code
-and get a executable file. E.g, for GPU version code, the commond looks like:  
+Please `cd` to the directory containing all source code such as `cd /GPU`, and then you can use a C++ complier to build the program and get a executable file. E.g., for GPU version code, the commond looks like:  
 ```
 nvcc *.cpp *.cu -o outputfile `pkg-config opencv --cflags --libs` -std=c++11
 ```
