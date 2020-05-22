@@ -28,7 +28,7 @@ stitch each photo processed through the pre-processing stage.
 ## Instruction
 Here we provide a GPU version code in the `/GPU` and a CPU-only version code in the `/CPU`. All code is written in **C++**.
 
-###Pre-reqirements
+### Pre-reqirements
 * C++ compiler
 * OpenCV 3.20 (The cuda module needs to be open for GPU version code)
 * Cuda 8.0 (only for GPU version code)
@@ -36,7 +36,7 @@ Here we provide a GPU version code in the `/GPU` and a CPU-only version code in 
 
 Other versions of OpenCV and Cuda might work as well, but there is no guarantee on it.
 
-###Requirements for input photos
+### Requirements for input photos
 Our algorithm requires the camera to rotate horizontally around a vertical rotation axis, 
 or require multiple cameras around an axis on the same horizontal plane to capture photos at various angles at the same time. 
 Besides, it’s also necessary to set a vertical camera to get the scene information in the vertical direction (see Figure bwlow).
@@ -49,7 +49,7 @@ Before fed into this program, these 6 photos need to be pre-processed with disto
 This part can be finished with many existing software package (e.g. [Hugin](http://hugin.sourceforge.net/)) and is not included in this repository.
 
 
-###Build and Run
+### Build and Run
 Please `cd` to the source code directory such as `cd /GPU`, and then you can use a C++ complier to build all source code
 and get a executable file. E.g, for GPU version code, the commond looks like:  
 ```
@@ -75,4 +75,4 @@ All input photos have been pre-processed through [Hugin](http://hugin.sourceforg
 ## Citation
 If you find this repository helps your work, please kindly cite our paper as follows:
 
-** High-quality Panorama Stitching based on Asymmetric Bidirectional Optical Flow. [available later] **
+**High-quality Panorama Stitching based on Asymmetric Bidirectional Optical Flow. [available later]**
