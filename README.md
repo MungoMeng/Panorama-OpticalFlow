@@ -30,9 +30,9 @@ Here we provide a GPU version code in the `/GPU` and a CPU-only version code in 
 
 ### Pre-reqirements
 * C++ compiler
-* OpenCV 3.20 (The cuda module needs to be open for GPU version code)
-* Cuda 8.0 (only for GPU version code)
-* gflags、glog
+* OpenCV-3.20 (The cuda module needs to be open for GPU version code)
+* Cuda-8.0 (only for GPU version code)
+* gflags, glog
 
 Other versions of OpenCV and Cuda might work as well, but there is no guarantee on it.
 
