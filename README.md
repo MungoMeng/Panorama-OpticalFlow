@@ -26,7 +26,7 @@ stitch each photo processed through the pre-processing stage.
 ![result](https://github.com/MungoMeng/Panorama_OpticalFlow/blob/master/Figure/Result.png)  
 
 ## Instruction
-Here we provide a GPU version code in the `/GPU` and a CPU-only version code in the `/CPU`. All code is written in **C++**.
+Here we provide a GPU version code in the `./GPU` and a CPU-only version code in the `./CPU`. All code is written in **C++**.
 
 ### Pre-reqirements
 * C++ compiler
@@ -50,7 +50,7 @@ This part can be finished with many existing packages (e.g. [Hugin](http://hugin
 
 
 ### Build and Run
-Please `cd` to the directory containing all source code such as `cd /GPU`, and then you can use a C++ complier to build the program and get a executable file. E.g., for GPU version code, the commond looks like:  
+Please `cd` to the directory containing all source code such as `cd /path_to_GPU`, and then you can use a C++ complier to build the program and get a executable file. E.g., for GPU version code, the commond looks like:  
 ```
 nvcc *.cpp *.cu -o outputfile `pkg-config opencv --cflags --libs` -std=c++11
 ```
@@ -64,11 +64,11 @@ The code only outputs a panoramic image as the final result,
 but, if you want, you can uncomment some lines in the `main.cpp` to output intermediate results of stitching each photo in each iteration.
 
 ## Alternative version
-We also provide an alternative version code in the `/CPU_4Input`. This program can be used when you have 4 horizontal
+We also provide an alternative version code in the `./CPU_4Input`. This program can be used when you have 4 horizontal
 photos captured by wide-angle lens cameras. This program can stitch all 4 photos in one pass, so it's much faster than the original version.
 
 ## Test data
-In the `/Test_data` and `/Test_data_4Input`, we provide some input photos to test our algorithm/code. 
+In the `./Test_data` and `./Test_data_4Input`, we provide some input photos to test our algorithm/code. 
 All input photos have been pre-processed through [Hugin](http://hugin.sourceforge.net/).
 
 ## Citation
