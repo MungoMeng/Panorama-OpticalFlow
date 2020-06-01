@@ -9,7 +9,7 @@ For photos taken from a close perspective or with a relatively large parallax,
 a seamless though partially distorted panoramic image can also be obtained. Besides, 
 with the help of Graphics Processing Unit (GPU), this algorithm can complete the whole stitching process at a very fast speed:
 typically, it only takes less than 30s to obtain a panoramic image of 9000-by-4000 pixels, 
-which means our panorama stitching algorithm is of high value in many real-time applications.
+which means our panorama stitching algorithm is of high value in many real-time applications.  
 **For more details, please refer to our paper (available later).**
 
 ## Workflow
