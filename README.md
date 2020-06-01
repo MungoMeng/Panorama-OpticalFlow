@@ -2,7 +2,7 @@
 we proposed a panorama stitching algorithm based on asymmetric bidirectional optical flow. 
 This algorithm expects multiple photos captured by fisheye lens cameras as input, and then, 
 through the proposed algorithm, these photos can be merged into 
-**a high-quality 360-degree spherical panoramic image**. 
+a high-quality 360-degree spherical panoramic image. 
 For photos taken from a distant perspective, the parallax among them is relatively small, 
 and the obtained panoramic image can be nearly seamless and undistorted. 
 For photos taken from a close perspective or with a relatively large parallax, 
