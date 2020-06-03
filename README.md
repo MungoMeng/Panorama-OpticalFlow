@@ -13,7 +13,7 @@ which means our panorama stitching algorithm is of high value in many real-time 
 **For more details, please refer to our [paper](https://arxiv.org/abs/2006.01201).**
 
 ## Workflow
-![workflow](https://github.com/MungoMeng/Panorama_OpticalFlow/blob/master/Figure/Workflow.png)
+![workflow](https://github.com/MungoMeng/Panorama-OpticalFlow/blob/master/Figure/Workflow.png)
 
 Our algorithm can be divided into two stages. The first one is a pre-processing stage that can be implemented by many
 open-source packages or existing algorithms, including distortion correction, chromaticity correction, 
@@ -23,7 +23,7 @@ stitch each photo processed through the pre-processing stage.
 **This repository only contains the code of the second stage.**
 
 ## Result Comparison
-![result](https://github.com/MungoMeng/Panorama_OpticalFlow/blob/master/Figure/Result.png)  
+![result](https://github.com/MungoMeng/Panorama-OpticalFlow/blob/master/Figure/Result.png)  
 
 ## Instruction
 Here we provide a GPU version code in the `./GPU` and a CPU-only version code in the `./CPU`. All code is written in **C++**.
@@ -41,7 +41,7 @@ Our algorithm requires the camera to rotate horizontally around a vertical rotat
 or requires multiple cameras around an axis on the same horizontal plane to capture photos at various angles at the same time. 
 Besides, it’s also necessary to set a vertical camera to get the scene information in the vertical direction (see Figure below).
 
-![Input_requirement](https://github.com/MungoMeng/Panorama_OpticalFlow/blob/master/Figure/Input_requirement.png)
+![Input_requirement](https://github.com/MungoMeng/Panorama-OpticalFlow/blob/master/Figure/Input_requirement.png)
 
 Our code needs 6 photos with overlap as input. Among them, 1 photo is captured by a vertical camera and is named `top.tif`, 
 other 5 photos are captured by horizontal cameras and are named from `1.tif` to `5.tif`. All these 6 photos should be put into the same address.  
