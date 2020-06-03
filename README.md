@@ -75,4 +75,4 @@ All input photos have been pre-processed through [Hugin](http://hugin.sourceforg
 If you find this repository helps your work, please kindly cite our paper as follows:
 
 **High-quality Panorama Stitching based on Asymmetric Bidirectional Optical Flow.  
-(accepted at ICCIA2020) [[arXiv](https://arxiv.org/abs/2006.01201)]**
+(Accepted at ICCIA2020) [[arXiv](https://arxiv.org/abs/2006.01201)]**
