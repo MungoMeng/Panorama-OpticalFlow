@@ -20,7 +20,7 @@ open-source packages or existing algorithms, including distortion correction, ch
 and coarse feature-based registration. The second one is an optical flow-based blending stage, 
 we iteratively use an image blending algorithm based on asymmetric bidirectional optical flow to finely 
 stitch each photo processed through the pre-processing stage. 
-**This repository only contains the code of the second stage.**
+**This repository only contains the code of the second stage. The first stage can be finished with many existing packages (e.g. [Hugin](http://hugin.sourceforge.net/)) and is not included in this repository.**
 
 ## Result Comparison
 ![result](https://github.com/MungoMeng/Panorama-OpticalFlow/blob/master/Figure/Result.png)  
@@ -43,10 +43,7 @@ Besides, it’s also necessary to set a vertical camera to get the scene informa
 
 ![Input_requirement](https://github.com/MungoMeng/Panorama-OpticalFlow/blob/master/Figure/Input_requirement.png)
 
-Our code needs 6 photos with overlap as input. Among them, 1 photo is captured by a vertical camera and is named `top.tif`, 
-other 5 photos are captured by horizontal cameras and are named from `1.tif` to `5.tif`. All these 6 photos should be put into the same address.  
-Before fed into this program, these 6 photos need to be pre-processed with distortion/chromaticity correction and a coarse registration.
-This part can be finished with many existing packages (e.g. [Hugin](http://hugin.sourceforge.net/)) and is not included in this repository.
+Before fed into this program, all photos need to be pre-processed with distortion/chromaticity correction and a coarse registration. Then, our code needs 6 pre-processed photos with overlap as input. Among them, 1 photo is captured by a vertical camera and is named `top.tif`, other 5 photos are captured by horizontal cameras and are named from `1.tif` to `5.tif`. All these 6 photos should be put into the same address.  
 
 
 ### Build and Run
