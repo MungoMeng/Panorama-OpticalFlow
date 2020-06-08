@@ -19,7 +19,7 @@ Our algorithm can be divided into two stages. The first one is a pre-processing 
 open-source packages or existing algorithms, including distortion correction, chromaticity correction, 
 and coarse feature-based registration. The second one is an optical flow-based blending stage, 
 we iteratively use an image blending algorithm based on asymmetric bidirectional optical flow to finely 
-stitch each photo processed through the pre-processing stage. 
+stitch each photo processed through the pre-processing stage.  
 **This repository only contains the code of the second stage. The first stage can be finished with many existing packages (e.g. [Hugin](http://hugin.sourceforge.net/)) and is not included in this repository.**
 
 ## Result Comparison
