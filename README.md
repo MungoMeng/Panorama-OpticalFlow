@@ -10,7 +10,7 @@ a seamless though partially distorted panoramic image can also be obtained. Besi
 with the help of Graphics Processing Unit (GPU), this algorithm can complete the whole stitching process at a very fast speed:
 typically, it only takes less than 30s to obtain a panoramic image of 9000-by-4000 pixels, 
 which means our panorama stitching algorithm is of high value in many real-time applications.  
-**For more details, please refer to our [paper](https://arxiv.org/abs/2006.01201).**
+**For more details, please refer to our paper. [[IEEE](https://ieeexplore.ieee.org/document/9178683)] [[arXiv](https://arxiv.org/abs/2006.01201)].**
 
 ## Workflow
 ![workflow](https://github.com/MungoMeng/Panorama-OpticalFlow/blob/master/Figure/Workflow.png)
