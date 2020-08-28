@@ -1,5 +1,5 @@
 # Panorama Stitching based on Asymmetric Bidirectional Optical Flow
-we proposed a panorama stitching algorithm based on asymmetric bidirectional optical flow. 
+We proposed a panorama stitching algorithm based on asymmetric bidirectional optical flow. 
 This algorithm expects multiple photos captured by fisheye lens cameras as input, and then, 
 through the proposed algorithm, these photos can be merged into 
 a high-quality 360-degree spherical panoramic image. 
@@ -19,8 +19,9 @@ Our algorithm can be divided into two stages. The first one is a pre-processing 
 open-source packages or existing algorithms, including distortion correction, chromaticity correction, 
 and coarse feature-based registration. The second one is an optical flow-based blending stage, 
 we iteratively use an image blending algorithm based on asymmetric bidirectional optical flow to finely 
-stitch each photo processed through the pre-processing stage.  
-**This repository only contains the code of the second stage. The first stage can be finished with many existing packages (e.g. [Hugin](http://hugin.sourceforge.net/)) and is not included in this repository.**
+stitch each photo processed through the pre-processing stage.
+
+**This repository only contains the code of the second stage. The first stage can be implemented through many existing packages (e.g. [Hugin](http://hugin.sourceforge.net/)) and is not included in this repository.**
 
 ## Result Comparison
 ![result](https://github.com/MungoMeng/Panorama-OpticalFlow/blob/master/Figure/Result.png)  
@@ -30,7 +31,7 @@ Here we provide a GPU version code in the `./GPU` and a CPU-only version code in
 
 ### Pre-reqirements
 * C++ compiler
-* OpenCV-3.20 (The cuda module needs to be open for GPU version code)
+* OpenCV-3.20 (The Cuda module needs to be open for GPU version code)
 * Cuda-8.0 (only for GPU version code)
 * gflags, glog
 
@@ -71,5 +72,4 @@ All input photos have been pre-processed through [Hugin](http://hugin.sourceforg
 ## Citation
 If you find this repository helps your work, please kindly cite our paper as follows:
 
-**High-quality Panorama Stitching based on Asymmetric Bidirectional Optical Flow.  
-(Accepted at ICCIA2020) [[arXiv](https://arxiv.org/abs/2006.01201)]**
+**M. Meng and S. Liu, "High-quality Panorama Stitching based on Asymmetric Bidirectional Optical Flow," 2020 5th International Conference on Computational Intelligence and Applications (ICCIA), Beijing, China, 2020, pp. 118-122, doi: 10.1109/ICCIA49625.2020.00030. [[IEEE](https://ieeexplore.ieee.org/document/9178683)] [[arXiv](https://arxiv.org/abs/2006.01201)]**
