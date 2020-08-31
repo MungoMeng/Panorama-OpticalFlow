@@ -31,7 +31,7 @@ Here we provide a GPU version code in the `./GPU` and a CPU-only version code in
 
 ### Pre-reqirements
 * C++ compiler
-* OpenCV-3.20 (The Cuda module needs to be open for GPU version code)
+* OpenCV-3.20 (Cuda module needs to be open for GPU version code)
 * Cuda-8.0 (only for GPU version code)
 * gflags, glog
 
@@ -44,11 +44,11 @@ Besides, it’s also necessary to set a vertical camera to get the scene informa
 
 ![Input_requirement](https://github.com/MungoMeng/Panorama-OpticalFlow/blob/master/Figure/Input_requirement.png)
 
-Before fed into this program, all photos need to be pre-processed with distortion/chromaticity correction and a coarse registration. Then, our code needs 6 pre-processed photos with overlap as input. Among them, 1 photo is captured by a vertical camera and is named `top.tif`, other 5 photos are captured by horizontal cameras and are named from `1.tif` to `5.tif`. All these 6 photos should be put into the same address.  
+Before fed into this program, all photos need to be pre-processed with distortion/chromaticity correction and a coarse registration. Then, our code expects 6 pre-processed photos as input. Among them, 1 photo is captured by a vertical camera and is named `top.tif`, other 5 photos are captured by horizontal cameras and are named from `1.tif` to `5.tif`. All these 6 photos should be put into the same directory.  
 
 
 ### Build and Run
-Please `cd` to the directory containing all source code such as `cd /path_to_GPU`, and then you can use a C++ complier to build the program and get a executable file. E.g., for GPU version code, the commond looks like:  
+Please `cd` to the directory containing all source code such as `cd /path_to_GPU`, and then you can use a C++ complier to build the program and get a executable file. For example, for GPU version code, the commond looks like:  
 ```
 nvcc *.cpp *.cu -o outputfile `pkg-config opencv --cflags --libs` -std=c++11
 ```
@@ -58,15 +58,15 @@ When you get the executable file, you can run it directly with the following par
 * `-top_img`: specify the file name of the top photo such as 'top.tif'.
 * `-flow_alg`: specify the mode of calculating optical flow (pixflow_low/pixflow_search_20).
 
-The code only outputs a panoramic image as the final result, 
-but, if you want, you can uncomment some lines in the `main.cpp` to output intermediate results of stitching each photo in each iteration.
+The code only outputs a panoramic image as final result, 
+but, if you want, you can uncomment some lines in the `main.cpp` to get intermediate results of stitching each photo in each iteration.
 
 ## Alternative version
 We also provide an alternative version code in the `./CPU_4Input`. This program can be used when you have 4 horizontal
 photos captured by wide-angle lens cameras. This program can stitch all 4 photos in one pass, so it's much faster than the original version.
 
 ## Test data
-In the `./Test_data` and `./Test_data_4Input`, we provide some input photos to test our algorithm/code. 
+In the `./Test_data` and `./Test_data_4Input`, we provide some input photos for testing our algorithm/code. 
 All input photos have been pre-processed through [Hugin](http://hugin.sourceforge.net/).
 
 ## Citation
