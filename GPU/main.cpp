@@ -45,6 +45,7 @@ void buildvisualizations(const Mat flowLtoR, const Mat flowRtoL, const Mat Image
 }
 
 int main(int argc, char** argv) {
+    initOpticalFlow(argc, argv);
     double StartTime = getCurrTimeSec();
     
     requireArg(FLAGS_test_dir, "test_dir");
