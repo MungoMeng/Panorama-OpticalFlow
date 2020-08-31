@@ -23,6 +23,9 @@
 #include "opencv2/imgcodecs.hpp"
 #include "opencv2/imgproc.hpp"
 
+#include <gflags/gflags.h>
+#include <glog/logging.h>
+
 namespace fLB {
     extern bool FLAGS_help;
     extern bool FLAGS_helpshort;
@@ -60,6 +63,14 @@ namespace util {
                                 const vector<int>& params = vector<int>());
     
     Mat stackHorizontal(const std::vector<Mat>& images);
+    
+    void printStacktrace();
+    
+    void terminateHandler();
+    
+    void sigHandler(int signal);
+    
+    void initOpticalFlow(int argc, char** argv);
     
     // <--------------------------------------------------------------------------------->
     template <typename T>
