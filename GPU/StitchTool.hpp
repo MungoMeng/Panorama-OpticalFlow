@@ -46,6 +46,7 @@ namespace stitch_tools{
         void Gather();
         
         void GenerateBlend();
+        void GenerateBlend_GPU();
         
         float countblend(
                          const int x,
