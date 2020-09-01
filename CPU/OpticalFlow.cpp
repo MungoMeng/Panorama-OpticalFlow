@@ -107,9 +107,10 @@ namespace optical_flow {
         imageR = colorImageR.clone();
         
         //extended to increase the continuity between lift and right boundary
+        Mat n_imageL,n_imageR;
         Mat Lpart,Rpart;
+        
         int length = imageL.cols/20;
-       
         Mat shftMat = (Mat_<double>(3,3)<<1,0,length, 0,1,0, 0,0,1);
         
         Lpart = imageL(Range(0,imageL.rows),Range(0,length));
