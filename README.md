@@ -50,7 +50,7 @@ Before fed into this program, all photos need to be pre-processed with distortio
 ### Build and Run
 Please `cd` to the directory containing all source code such as `cd /path_to_GPU`, and then you can use a C++ complier to build the program and get a executable file. For example, for GPU version code, the commond looks like:  
 ```
-nvcc *.cpp *.cu -o outputfile `pkg-config opencv --cflags --libs` -std=c++11
+nvcc *.cpp *.cu -o outputfile `pkg-config opencv --cflags --libs` -lglog -lgflags -std=c++11
 ```
 When you get the executable file, you can run it directly with the following parameters:  
 
