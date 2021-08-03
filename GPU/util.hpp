@@ -25,7 +25,30 @@
 
 #include <gflags/gflags.h>
 #include <glog/logging.h>
-
+#ifndef CV_BGRA2GRAY
+#define CV_BGRA2GRAY cv::COLOR_BGRA2GRAY
+#endif
+#ifndef CV_INTER_CUBIC
+#define CV_INTER_CUBIC cv::INTER_CUBIC
+#endif
+#ifndef CV_INTER_LINEAR
+#define CV_INTER_LINEAR cv::INTER_LINEAR
+#endif
+#ifndef CV_GRAY2BGRA
+#define CV_GRAY2BGRA cv::COLOR_GRAY2BGRA
+#endif
+#ifndef CV_BGR2BGRA
+#define CV_BGR2BGRA cv::COLOR_BGR2BGRA
+#endif
+#ifndef CV_HSV2BGR
+#define CV_HSV2BGR cv::COLOR_HSV2BGR
+#endif
+#ifndef CV_AA
+#define CV_AA cv::LINE_AA
+#endif
+#ifndef CV_THRESH_BINARY
+#define CV_THRESH_BINARY cv::THRESH_BINARY
+#endif
 namespace fLB {
     extern bool FLAGS_help;
     extern bool FLAGS_helpshort;
