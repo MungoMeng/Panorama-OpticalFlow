@@ -25,6 +25,8 @@
 
 #include <gflags/gflags.h>
 #include <glog/logging.h>
+
+//compatible with opencv4
 #ifndef CV_BGRA2GRAY
 #define CV_BGRA2GRAY cv::COLOR_BGRA2GRAY
 #endif
@@ -49,6 +51,7 @@
 #ifndef CV_THRESH_BINARY
 #define CV_THRESH_BINARY cv::THRESH_BINARY
 #endif
+
 namespace fLB {
     extern bool FLAGS_help;
     extern bool FLAGS_helpshort;
