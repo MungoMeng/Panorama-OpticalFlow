@@ -48,7 +48,7 @@ Before fed into this program, all photos need to be pre-processed with distortio
 
 
 ### Build and Run
-Please `cd` to the directory containing all source code such as `cd /path_to_GPU`, and then you can use a C++ complier to build the program and get a executable file. For example, for GPU version code, the commond looks like:  
+Please `cd` to the directory containing all source code, and then use a C++ complier to build the program and get a executable file. For example, for GPU-version code, the commond possibly looks like:  
 ```
 nvcc *.cpp *.cu -o outputfile `pkg-config opencv --cflags --libs` -lglog -lgflags -std=c++11
 ```
@@ -58,8 +58,7 @@ When you get the executable file, you can run it directly with the following par
 * `-top_img`: specify the file name of the top photo such as 'top.tif'.
 * `-flow_alg`: specify the mode of calculating optical flow (pixflow_low/pixflow_search_20).
 
-The code only outputs a panoramic image as final result, 
-but, if you want, you can uncomment some lines in the `main.cpp` to get intermediate results of stitching each photo in each iteration.
+Normally, the code only outputs a panoramic image as the final result. If needed, you can uncomment some lines in the `main.cpp` to get intermediate results of stitching each photo in each iteration.
 
 ## Alternative version
 We also provide an alternative version code in the `./CPU_4Input`. This program can be used when you have 4 horizontal
