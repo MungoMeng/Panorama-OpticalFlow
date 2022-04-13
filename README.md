@@ -70,5 +70,4 @@ All input photos have been pre-processed through [Hugin](http://hugin.sourceforg
 
 ## Publication
 If this repository helps your work, please kindly cite our paper:
-
 **Mingyuan Meng, Shaojun Liu, "High-quality Panorama Stitching based on Asymmetric Bidirectional Optical Flow," 2020 5th International Conference on Computational Intelligence and Applications (ICCIA), Beijing, China, 2020, pp. 118-122, doi: 10.1109/ICCIA49625.2020.00030. [[IEEE](https://ieeexplore.ieee.org/document/9178683)] [[arXiv](https://arxiv.org/abs/2006.01201)]**
