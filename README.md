@@ -68,7 +68,7 @@ photos captured by wide-angle lens cameras. This program can stitch all 4 photos
 In the `./Test_data` and `./Test_data_4Input`, we provide some input photos for testing our algorithm/code. 
 All input photos have been pre-processed through [Hugin](http://hugin.sourceforge.net/).
 
-## Citation
-If this repository helps your work, please kindly cite our paper as follows:
+## Publication
+If this repository helps your work, please kindly cite our paper:
 
 **Mingyuan Meng, Shaojun Liu, "High-quality Panorama Stitching based on Asymmetric Bidirectional Optical Flow," 2020 5th International Conference on Computational Intelligence and Applications (ICCIA), Beijing, China, 2020, pp. 118-122, doi: 10.1109/ICCIA49625.2020.00030. [[IEEE](https://ieeexplore.ieee.org/document/9178683)] [[arXiv](https://arxiv.org/abs/2006.01201)]**
